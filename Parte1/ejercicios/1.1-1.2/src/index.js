@@ -29,7 +29,7 @@ ReactDOM.render(<App />, document.getElementById('root')) */
 
 
 //EJ 1.2
-/* import React from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import Header from './Header'
 import Content from './Content'
@@ -53,4 +53,4 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))  */
+ReactDOM.render(<App />, document.getElementById('root'))  

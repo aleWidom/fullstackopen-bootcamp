@@ -1,14 +1,5 @@
-/* EJ1.1
- import React from 'react';
+// EJ1.3-1.4-1.5
 
-const Content = ({ partExercises }) => {
-    return <p>{partExercises.part}:{partExercises.exercises}</p>;
-};
-
-export default Content; */
-
-
-// EJ1.2
 import React from 'react';
 import Parts from './Parts';
 
@@ -22,8 +13,5 @@ const Content = ({ partExercises }) => {
     )
 };
 
-export default Content;
-
-
-
+export default Content; 
 

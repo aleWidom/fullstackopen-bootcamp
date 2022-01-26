@@ -1,6 +1,6 @@
 
 //EJ1.2
-/* import React from 'react'
+import React from 'react'
 
 const Parts = ({ partExercises }) => {
 
@@ -11,4 +11,4 @@ const Parts = ({ partExercises }) => {
     )
 }
 
-export default Parts; */
+export default Parts; 
