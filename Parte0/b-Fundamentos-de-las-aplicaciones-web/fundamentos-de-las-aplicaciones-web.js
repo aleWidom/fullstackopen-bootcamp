@@ -6,3 +6,14 @@
 
 /*Los sitios web de estilo SPA no obtienen todas sus páginas por separado del servidor sino que comprenden solo una página HTML obtenida del servidor, cuyo contenido se manipula con JavaScript que se ejecuta en el navegador. Un cambio en esto por ej se da en el formulario no tiene atributos de action o method para definir cómo y dónde enviar los datos de entrada. Cuando se crea exitosamente una peticiín Post con esta técnica no hay redireccionamiento y el estado es 201 Created*/
 
+
+
+//MIDUDEV
+
+//*En herramientas de desarrollo, solapa network podemos ver todos los requerimientos de recursos (req) que carga la página al cargarse o al refrescarse.
+//*ctrl shift p (puedo desactivar por ej javascript, luego lo puedo activar nuevamente)
+//*Dom: arbol de elementos de nuestra página web
+//*Puede servir el document. en la consola del misma navegador para ver los elementos del dom mas claro y encontrarlo de forma más sencilla
+//*Una forma de probar el css recomendable es dentro de las herramientas de desarrollador.
+//*hay diferentes tipos de propiedades en los requerimientos (la más alta es el html y css principal)
+///páginas web spa queremos evitar que el usuario recargue los recursos que ya había descargado

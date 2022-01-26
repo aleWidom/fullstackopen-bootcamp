@@ -94,4 +94,13 @@ const App2 = () => {
 
   //NO DEFINIR COMPONENTES DENTRO DE OTRO COMPONENTE
 
-  /*No crear componentes dentro de otros componentes*/
+/*No crear componentes dentro de otros componentes*/
+
+
+
+
+  //MIDUDEV
+
+  //*el use effect se ejecuta cada vez que se renderiza el componente
+///el use effect recibe dos parametros, el primero la función, el segundo las dependencias (las variables o información que si cambian debe ejecutar el efecto, tiene que ser un array)
+//*recomienda sacar del componente lo que va dentro del useEffect, y llevarlo a otro archivo

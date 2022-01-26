@@ -46,3 +46,11 @@ console.log(object1)
 //MATERIALES JAVASCRIPT DE REFERENCIA
 
 /* 1) You-Dont-Know-JS, 2)  javascript.info */ 
+
+
+
+//MIDUDEV
+
+//*asincrono (por ej fetch), nuestra aplicacion va a seguir funcionando, la aplicaciòn no va a esperar, no va a bloquear la pàgina. Javascript bloquea pero cuando es asincrono no.
+//*Promesa: objeto que guarda un valor futuro
+//*Primero se renderiza (sin ejecutar el useEffect(), luego ejecuta el efecto), y luego sigue renderizando
