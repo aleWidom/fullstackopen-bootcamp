@@ -1,4 +1,4 @@
-//EJ2.1
+//EJ2.1-2.2
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

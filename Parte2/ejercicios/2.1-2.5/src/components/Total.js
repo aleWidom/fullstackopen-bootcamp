@@ -1,8 +1,30 @@
-//EJ2.1
- import React from 'react';
+//EJ2.2
+/*  import React from 'react';
 
-const Total = ({ exercises }) => {
-    return <div>Number of exercises {exercises[0].exercises + exercises[1].exercises + exercises[2].exercises}</div>;
-};
+const Total = ({ partExercises }) => {
+
+    let sumaIndex = 0;
+
+   const suma = partExercises.map((e)=> {
+        sumaIndex += e.exercises
+        return sumaIndex;
+    })
+
+   return <h4>Total exercises: {suma[suma.length-1]}</h4>;
+}
+
+export default Total; 
+ */
+
+
+//EJ2.3
+import React from 'react';
+
+const Total = ({ partExercises }) => {
+
+   const suma = partExercises.map((e)=>e.exercises).reduce((acumulado,actual) => acumulado + actual )
+
+   return <h4>Total exercises: {suma}</h4>;
+}
 
 export default Total; 
