@@ -37,7 +37,7 @@ ReactDOM.render(
 
 
 //Ej1.13
-/* import React, { useState } from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import Button from './components/Button'
 import Description from './components/Description'
@@ -68,16 +68,16 @@ const App = () => {
   }
 
   const handleVote = () => () => {
-    setVotes(     
+    setVotes(
       [...votes],
       votes[selected].votes = votes[selected].votes + 1
-      )
+    )
   }
 
   return (
     <>
       <Button handleClick={handleRandom} title={"Anecdota random"} />
-      <Description title={anecdotes[selected]} count={votes[selected].votes + " votes"}/>
+      <Description title={anecdotes[selected]} count={votes[selected].votes + " votes"} />
       <Button handleClick={handleVote()} title={"Vote"} />
     </>
   )
@@ -86,13 +86,13 @@ const App = () => {
 ReactDOM.render(
   <App anecdotes={anecdotes} />,
   document.getElementById('root')
-) 
- */
+)
+
 
 
 
 //Ej1.14
-import React, { useState } from 'react'
+/* import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import Button from './components/Button'
 import Description from './components/Description'
@@ -151,4 +151,4 @@ const App = () => {
 ReactDOM.render(
   <App anecdotes={anecdotes} />,
   document.getElementById('root')
-) 
+)  */
