@@ -17,7 +17,7 @@ export default Total;
  */
 
 
-//EJ2.3
+//EJ2.3-2.4
 import React from 'react';
 
 const Total = ({ partExercises }) => {

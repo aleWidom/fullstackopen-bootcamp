@@ -17,19 +17,18 @@ export default Course;
  */
 
 
-//Ej2.2
+//Ej2.2-2.3-2.4
 import React from 'react';
 import Header from './Header';
 import Content from './Content';
 import Total from './Total'
 
-const Course = ({course}) => {
-    console.log(course)
+const Course = ({title, parts}) => {
   return (
     <>
-    <Header title={course.name} />
-    <Content partExercises={course.parts} />
-    <Total partExercises={course.parts}/>
+    <Header title={title} />
+    <Content partExercises={parts} />
+    <Total partExercises={parts}/>
     </>
   )
 };
