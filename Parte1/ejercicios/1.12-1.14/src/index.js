@@ -97,7 +97,7 @@ import ReactDOM from 'react-dom'
 import Button from './components/Button'
 import Description from './components/Description'
 import Title from './components/Title'
-import title from './components/helpers/title'
+import title from './helpers/title'
 
 const anecdotes = [
   'If it hurts, do it more often',
