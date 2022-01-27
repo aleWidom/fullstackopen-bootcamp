@@ -8,6 +8,10 @@
 /*El elemento key debe encontrarse donde se esta realizando el mapeo*/
 
 
+//CUANDO LA APLICACION SE ROMPE
+
+/* Como lo primero que se renderiza es el componente App, Vale la pena poner el primer console.log allí */
+
 
 //MIDUDEV
 

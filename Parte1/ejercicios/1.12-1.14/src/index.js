@@ -97,6 +97,7 @@ import ReactDOM from 'react-dom'
 import Button from './components/Button'
 import Description from './components/Description'
 import Title from './components/Title'
+import title from './helpers/title'
 
 const anecdotes = [
   'If it hurts, do it more often',
@@ -107,9 +108,12 @@ const anecdotes = [
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
 
+//creo nuevo array y lo pongo como estado con cada indice con un objeto con las anecdota y los votos
 const noteObject = anecdotes.map((e) => {
   return { anecdotes: e, votes: 0 }
 })
+
+
 
 const App = () => {
 
@@ -117,33 +121,30 @@ const App = () => {
 
   const [votes, setVotes] = useState(noteObject)
 
+  /*Se ejecuta cada vez que se apreta el botón Anecdota random, se busca un número random, se lo redondea y se setea ese número al estado de número selected*/
   const handleRandom = () => {
     const numberRandom = Math.random() * 5
     const numberRound = Math.round(numberRandom)
     setSelected(numberRound);
   }
 
+  /*Se ejecuta esta función cada vez que hay un voto nuevo, se reemplaza el objeto que contiene la informacion agrengando el voto según el indice que se saca a través del numero seleccionado y se le suma uno*/
   const handleVote = () => () => {
-    setVotes(     
+    setVotes(
       [...votes],
       votes[selected].votes = votes[selected].votes + 1
-      )
+    )
   }
 
- const moreVotes= votes.find((e)=> {
-    return e.votes === 0
- })
-
- console.log(moreVotes)
-
-
+  
+  const titleSelected = title(votes);
 
   return (
     <>
       <Button handleClick={handleRandom} title={"Anecdota random"} />
-      <Description title={anecdotes[selected]} count={votes[selected].votes + " votes"}/>
+      <Description title={anecdotes[selected]} count={votes[selected].votes + " votes"} />
       <Button handleClick={handleVote()} title={"Vote"} />
-      <Title title={`Anecdota con más votos: ${moreVotes.anecdotes} ${moreVotes.votes} votes`}/> 
+      <Title title={titleSelected}/>
     </>
   )
 }
