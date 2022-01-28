@@ -1,53 +1,45 @@
+//EJ2.6
+import React, { useState } from 'react'
 
-import { useState } from "react";
-
-import React from 'react';
-
-const Note = ({ title }) => {
-  return (
-    <li>{title}</li>
-  )
-};
+const App = () => {
+  const [persons, setPersons] = useState([
+    { name: 'Arto Hellas' }
+  ])
+  const [newName, setNewName] = useState('')
 
 
-const App = ({ notes }) => {
-
-  const [note, setNotes] = useState(notes);
-  const [newNote, setNewNote] = useState('a new note...')
-
-  const addNote = (event) => {
-    event.preventDefault()
-    const noteObject = {
-      content: newNote,
-      date: new Date().toISOString(),
-      important: Math.random() < 0.5,
-      id: notes.length + 1,
+  const handleAddPersons = (e) => {
+    e.preventDefault()
+    const newPerson = {
+      name: newName
     }
-    setNotes([...note, noteObject])
-    setNewNote('')
+    setPersons([...persons, newPerson])
+    setNewName('')
   }
 
-  const handleNoteChange = (event) => {
-    console.log(event.target.value)
-    setNewNote(event.target.value)
+  const handleChange = (e) => {
+    setNewName(e.target.value)
   }
 
 
   return (
-    <>
-      <ul>
-        {note.map((e) => {
-          return <Note key={e.id} title={e.content} />
-        })}
-      </ul>
-      <form onSubmit={addNote}>
-        <input value={newNote} onChange={handleNoteChange} />
-        <button type="submit">save</button>
+    <div>
+      <h2>Phonebook</h2>
+      <form onSubmit={handleAddPersons}>
+        <div>
+          name: <input value={newName} onChange={handleChange} />
+        </div>
+        <div>
+          <button type="submit">add</button>
+        </div>
       </form>
-    </>
+      <ul>
+      {persons.map((e)=> {
+       return <li key={e.name}>{e.name}</li>
+      })}
+      </ul>
+    </div>
   )
 }
 
 export default App;
-
-
