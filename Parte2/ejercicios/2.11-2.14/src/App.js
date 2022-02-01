@@ -1,40 +1,40 @@
 //EJ2.11
-import React, { useEffect, useState } from 'react'
+/* import React, { useEffect, useState } from 'react'
 import Title from './components/Title'
 import Search from './components/Search'
-import AddPerson from './components/AddPerson'
-import ListPerson from './components/ListPerson'
+import Add from './components/Add'
+import List from './components/List'
 import axios from 'axios'
 
 const App = () => {
 
-  /*Datos de Agenda*/
 
-  useEffect(()=> {
+
+  useEffect(() => {
     axios
-    .get('http://localhost:3001/persons')
-    .then((response)=> {
-      const {data} = response
-      setPersons(data)
-    })
+      .get('http://localhost:3001/persons')
+      .then((response) => {
+        const { data } = response
+        setPersons(data)
+      })
   }, [])
 
 
   const [persons, setPersons] = useState([])
 
-  /*Datos input Name*/
+
   const [newName, setNewName] = useState('')
 
 
-  /*Datos input Number*/
+
   const [newNumber, setNewNumber] = useState('')
 
 
-  /*Datos input Search*/
+
   const [newFilter, setNewFilter] = useState('')
 
 
-  /*Funciòn para agregar datos a la agenda*/
+
   const handleAddPersons = (e) => {
     e.preventDefault()
     const arrayName = persons.map((e) => {
@@ -65,17 +65,17 @@ const App = () => {
     }
   }
 
-  /*Funciòn que ve cambios en el input name*/
+
   const handleChangeName = (e) => {
     setNewName(e.target.value)
   }
 
-  /*Funciòn que ve cambios en el input number*/
+
   const handleChangeNumber = (e) => {
     setNewNumber(e.target.value)
   }
 
-    /*Funciòn que ve cambios en el input de búsqueda*/
+
   const handleFilter = (e) => {
     setNewFilter(e.target.value)
   }
@@ -86,8 +86,38 @@ const App = () => {
       <Title title={"Phonebook"} />
       <Search handleFilter={handleFilter} newFilter={newFilter} />
       <Title title={"Add a new"} />
-      <AddPerson handleAddPersons={handleAddPersons} newName={newName} handleChangeName={handleChangeName} newNumber={newNumber} handleChangeNumber={handleChangeNumber} />
-      <ListPerson persons={persons} newFilter={newFilter} />
+      <Add handleAddPersons={handleAddPersons} newName={newName} handleChangeName={handleChangeName} newNumber={newNumber} handleChangeNumber={handleChangeNumber} />
+      <List persons={persons} newFilter={newFilter} />
+    </div>
+  )
+}
+
+export default App; */
+
+
+
+//EJ2.12
+import React, { useState } from 'react'
+import Search from './components/Search'
+import List from './components/List'
+
+
+const App = () => {
+
+  /*Datos input Search*/
+  const [newFilter, setNewFilter] = useState('')
+
+
+  /*Funciòn que ve cambios en el input de búsqueda*/
+  const handleFilter = (e) => {
+    setNewFilter(e.target.value)
+  }
+
+
+  return (
+    <div>
+      <Search handleFilter={handleFilter} newFilter={newFilter} />
+      <List newFilter={newFilter} />
     </div>
   )
 }
