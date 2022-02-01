@@ -1,4 +1,3 @@
-//EJ2.10
 import React from 'react';
 
 const Search = ({ handleFilter, newFilter }) => {

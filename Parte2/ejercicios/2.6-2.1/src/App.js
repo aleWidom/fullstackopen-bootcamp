@@ -350,7 +350,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
 
 
-  /*Datos input Number*/
+  /*Datos input Search*/
   const [newFilter, setNewFilter] = useState('')
 
 
@@ -390,10 +390,12 @@ const App = () => {
     setNewName(e.target.value)
   }
 
+  /*Funciòn que ve cambios en el input number*/
   const handleChangeNumber = (e) => {
     setNewNumber(e.target.value)
   }
 
+    /*Funciòn que ve cambios en el input de búsqueda*/
   const handleFilter = (e) => {
     setNewFilter(e.target.value)
   }
