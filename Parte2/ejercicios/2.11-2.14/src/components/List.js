@@ -11,7 +11,6 @@ const List = ({ newFilter }) => {
             .get('https://restcountries.com/v3.1/all')
             .then((response) => {
                 const { data } = response
-                console.log(data)
                 setCountry(data)
             })
     }, [])
@@ -25,20 +24,49 @@ const List = ({ newFilter }) => {
                 })}
             </ul>
         )
-    } /* else {
+    } else {
 
-        const personFilter = persons.filter((e) => {
-            return e.name.toUpperCase().includes(newFilter.toUpperCase())
+        const countrySearch = country.filter((e) => {
+            return e.name.common.toUpperCase().includes(newFilter.toUpperCase())
         })
 
-        return (
-            <ul>
-                {personFilter.length === 0 ? "No hay nombres que coincidan" : personFilter.map((e) => {
-                    return <li key={e.name}>{e.name} - {e.number}</li>
-                })}
-            </ul>
-        )
-    } */
+        console.log(countrySearch)
+
+        if (countrySearch.length === 0) {
+            return <p>No hay nombres que coincidan</p>
+        } else if (countrySearch.length >= 10) {
+            return (
+                <>
+                    <p>Too many matches, specify another filter</p>
+                </>
+            )
+        } else if (countrySearch.length < 10 && countrySearch.length > 1) {
+            return (
+                <ul>
+                    {countrySearch.map((e) => {
+                        return <li key={e.name.common}>{e.name.common}</li>
+                    })}
+                </ul>
+            )
+        } else if (countrySearch.length === 1) {
+            return (
+                <>
+                    {countrySearch.map((e) => {
+                        return <div key={e.name.common}>
+                            <p>País que coincide con su búsqueda: {e.name.common}</p>
+                            <div>{e.capital.map((e) =>
+                                <p key={e}>Capital: {e}</p>
+                            )}</div>
+                            <p>Population: {e.population}</p>
+                            <img src={e.flags.png}/>
+                         {/*    {console.log(e.languages.por)}; */}
+                        {/*     <p>{e.languages}</p> */}
+                        </div>
+                    })}
+                </>
+            )
+        }
+    }
 };
 
 export default List;

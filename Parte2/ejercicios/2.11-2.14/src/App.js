@@ -113,7 +113,6 @@ const App = () => {
     setNewFilter(e.target.value)
   }
 
-
   return (
     <div>
       <Search handleFilter={handleFilter} newFilter={newFilter} />
