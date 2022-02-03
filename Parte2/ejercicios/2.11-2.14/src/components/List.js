@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+//EJ2.12
+/* import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 
 
@@ -59,8 +60,111 @@ const List = ({ newFilter }) => {
                             )}</div>
                             <p>Population: {e.population}</p>
                             <img src={e.flags.png}/>
-                         {/*    {console.log(e.languages.por)}; */}
-                        {/*     <p>{e.languages}</p> */}
+                        </div>
+                    })}
+                </>
+            )
+        }
+    }
+};
+
+export default List;
+ */
+
+
+//EJ2.13
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'
+import Button from './Button';
+
+
+const List = ({ newFilter }) => {
+
+    const [country, setCountry] = useState([])
+
+    const [show, setShow] = useState(false)
+
+    const [countryDetail, setCountryDetail] = useState([])
+
+
+    const handleClickShowNoShow = (country) => () => {
+        setShow(!show)
+        setCountryDetail(country)
+    }
+
+    useEffect(() => {
+        axios
+            .get('https://restcountries.com/v3.1/all')
+            .then((response) => {
+                const { data } = response
+                setCountry(data)
+            })
+    }, [])
+
+
+    if (newFilter.length === 0) {
+        return (
+            <ul>
+                {country.map((e) => {
+                    return <li key={e.name.common}>{e.name.common}</li>
+                })}
+            </ul>
+        )
+    } else {
+
+        const countrySearch = country.filter((e) => {
+            return e.name.common.toUpperCase().includes(newFilter.toUpperCase())
+        })
+
+
+        if (countrySearch.length === 0) {
+            return <p>No hay nombres que coincidan</p>
+        } else if (countrySearch.length >= 10) {
+            return (
+                <>
+                    <p>Too many matches, specify another filter</p>
+                </>
+            )
+        } else if (countrySearch.length < 10 && countrySearch.length > 1) {
+            if (show === false) {
+                return (
+                    <>
+                        {countrySearch.map((e) => {
+                            return (
+                                <div key={e.name.common}>
+                                    <p key={e.name.common}>{e.name.common}</p>
+                                    <Button handleClick={handleClickShowNoShow(e)} title={"show detail"} />
+                                </div>
+                            )
+                        })}
+                    </>
+                )
+            } else {
+                return (
+                    <>
+                        <p>País que coincide con su búsqueda: {countryDetail.name.common}</p>
+                        <div>{countryDetail.capital.map((e) =>
+                            <p key={e}>Capital: {e}</p>
+                        )}</div>
+                        <p>Population: {countryDetail.population}</p>
+                        <img src={countryDetail.flags.png} alt='flag' />
+                        <div>
+                        <Button handleClick={handleClickShowNoShow("")} title={"back"} />
+                        </div>
+                    </>
+                )
+            }
+        } else if (countrySearch.length === 1) {
+            return (
+                <>
+                    {countrySearch.map((e) => {
+                        return <div key={e.name.common}>
+                            <p>País que coincide con su búsqueda: {e.name.common}</p>
+                            <div>{e.capital.map((e) =>
+                                <p key={e}>Capital: {e}</p>
+                            )}</div>
+                            <p>Population: {e.population}</p>
+                            <img src={e.flags.png} alt='flag' />
                         </div>
                     })}
                 </>
