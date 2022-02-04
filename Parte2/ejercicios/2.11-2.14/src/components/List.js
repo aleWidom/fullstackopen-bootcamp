@@ -78,21 +78,14 @@ import axios from 'axios'
 import Button from './Button';
 
 
-const List = ({ newFilter }) => {
+const List = ({ value, show, setShow }) => {
 
     const [country, setCountry] = useState([])
 
-    const [show, setShow] = useState(false)
-
     const [countryDetail, setCountryDetail] = useState([])
 
-
-    const handleClickShowNoShow = (country) => () => {
-        setShow(!show)
-        setCountryDetail(country)
-    }
-
     useEffect(() => {
+        console.log("effect")
         axios
             .get('https://restcountries.com/v3.1/all')
             .then((response) => {
@@ -102,7 +95,15 @@ const List = ({ newFilter }) => {
     }, [])
 
 
-    if (newFilter.length === 0) {
+
+    const handleClickShowNoShow = (country) => () => {
+        setShow(!show)
+        setCountryDetail(country)
+    }
+
+
+
+    if (value.length === 0) {
         return (
             <ul>
                 {country.map((e) => {
@@ -113,7 +114,7 @@ const List = ({ newFilter }) => {
     } else {
 
         const countrySearch = country.filter((e) => {
-            return e.name.common.toUpperCase().includes(newFilter.toUpperCase())
+            return e.name.common.toUpperCase().includes(value.toUpperCase())
         })
 
 
@@ -142,15 +143,12 @@ const List = ({ newFilter }) => {
             } else {
                 return (
                     <>
-                        <p>País que coincide con su búsqueda: {countryDetail.name.common}</p>
+                        <p>País: {countryDetail.name.common}</p>
                         <div>{countryDetail.capital.map((e) =>
                             <p key={e}>Capital: {e}</p>
                         )}</div>
                         <p>Population: {countryDetail.population}</p>
                         <img src={countryDetail.flags.png} alt='flag' />
-                        <div>
-                        <Button handleClick={handleClickShowNoShow("")} title={"back"} />
-                        </div>
                     </>
                 )
             }

@@ -14,14 +14,37 @@ export default Search; */
 
 
 //EJ2.12
-import React from 'react';
+import React, { useState } from 'react';
+import List from './List';
 
-const Search = ({ handleFilter, newFilter }) => {
+
+const Search = () => {
+
+    /*Datos input Search*/
+
+    const [newFilter, setNewFilter] = useState('')
+
+    const [show, setShow] = useState(false)
+
+
+
+
+    console.log("fueraeffectSearch")
+
+
+    /*Funciòn que ve cambios en el input de búsqueda*/
+    const handleFilter = (e) => {
+        setNewFilter(e.target.value)
+    }
+
     return (
         <div>
             find countries: <input onChange={handleFilter} value={newFilter} />
+            <List value={newFilter} show={show} setShow={setShow} />
         </div>
     )
 };
 
 export default Search;
+
+

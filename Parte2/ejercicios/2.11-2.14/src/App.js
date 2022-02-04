@@ -97,26 +97,16 @@ export default App; */
 
 
 //EJ2.12
-import React, { useState } from 'react'
-import Search from './components/Search'
-import List from './components/List'
+import Search from './components/Search';
 
 
 const App = () => {
 
-  /*Datos input Search*/
-  const [newFilter, setNewFilter] = useState('')
 
-
-  /*Funciòn que ve cambios en el input de búsqueda*/
-  const handleFilter = (e) => {
-    setNewFilter(e.target.value)
-  }
 
   return (
     <div>
-      <Search handleFilter={handleFilter} newFilter={newFilter} />
-      <List newFilter={newFilter} />
+      <Search />
     </div>
   )
 }
