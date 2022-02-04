@@ -128,3 +128,6 @@ El segundo parámetro de useEffect se usa para especificar la frecuencia con la 
 La aplicación React que se ejecuta en el navegador obtiene los datos formateados JSON desde json-server que se ejecuta en el puerto 3001 de la máquina. El servidor del que consultamos los datos - json-server - obtiene sus datos del archivo db.json.
 
 En este punto del desarrollo, todas las partes de la aplicación residen en la máquina del desarrollador de software, también conocida como localhost. */
+
+
+/*Tuve que reiniciar servidor para que funcione la varialbe de entorno (para que me actualice el nuevo valor)*/
