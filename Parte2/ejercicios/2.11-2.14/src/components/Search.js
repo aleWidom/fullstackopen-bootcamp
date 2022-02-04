@@ -27,14 +27,10 @@ const Search = () => {
     const [show, setShow] = useState(false)
 
 
-
-
-    console.log("fueraeffectSearch")
-
-
     /*Funciòn que ve cambios en el input de búsqueda*/
     const handleFilter = (e) => {
         setNewFilter(e.target.value)
+        setShow(false)
     }
 
     return (

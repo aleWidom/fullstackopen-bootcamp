@@ -85,7 +85,6 @@ const List = ({ value, show, setShow }) => {
     const [countryDetail, setCountryDetail] = useState([])
 
     useEffect(() => {
-        console.log("effect")
         axios
             .get('https://restcountries.com/v3.1/all')
             .then((response) => {
@@ -97,7 +96,7 @@ const List = ({ value, show, setShow }) => {
 
 
     const handleClickShowNoShow = (country) => () => {
-        setShow(!show)
+        setShow(true)
         setCountryDetail(country)
     }
 
