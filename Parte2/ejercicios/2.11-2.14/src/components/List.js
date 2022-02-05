@@ -220,8 +220,6 @@ const List = ({ value, show, setShow }) => {
     }, [country])
 
 
-    console.log(weather)
-
     const handleClickShowNoShow = (country) => () => {
         setShow(true)
         setCountryDetail(country)
@@ -265,9 +263,9 @@ const List = ({ value, show, setShow }) => {
                 return (
                     <>
                         <p>País: {countryDetail.name.common}</p>
-                        <div>{countryDetail.capital.map((e) =>
+                        <div>{countryDetail.capital ? countryDetail.capital.map((e) =>
                             <p key={e}>Capital: {e}</p>
-                        )}</div>
+                        ) : ""}</div>
                         <p>Population: {countryDetail.population}</p>
                         <img src={countryDetail.flags.png} alt='flag' />
                     </>
@@ -282,18 +280,18 @@ const List = ({ value, show, setShow }) => {
                         {country.map((e) => {
                             return <div key={e.name.common}>
                                 <h4>País que coincide con su búsqueda: {e.name.common}</h4>
-                                <div>{e.capital.map((e) =>
+                                <div>{e.capital ? e.capital.map((e) =>
                                     <p key={e}>Capital: {e}</p>
-                                )}</div>
+                                ) : ""}</div>
                                 <p>Population: {e.population}</p>
                                 <img src={e.flags.png} alt='flag' />
                             </div>
                         })}
                         <h4>Temperatura</h4>
-                        <p>{weather.data.current.temperature} °C</p>
-                        <p>{weather.data.current.weather_icons.map((e) => {
+                        <p>{weather.data.current ? `${weather.data.current.temperature} ºC` : "No disponible"}</p>
+                        <p>{weather.data.current ? weather.data.current.weather_icons.map((e) => {
                             return <img alt={'icon-wather'} src={e} key={e} />
-                        })}</p>
+                        }) : ""}</p>
                     </>
                 )
             }
