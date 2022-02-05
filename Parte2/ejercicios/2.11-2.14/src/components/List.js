@@ -179,7 +179,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import Button from './Button';
 
-/* REACT_APP_API_KEY= ef432c2516a7fe344a424d7b3b65d2ef */
+
 
 const List = ({ value, show, setShow }) => {
 
@@ -190,34 +190,43 @@ const List = ({ value, show, setShow }) => {
     const [weather, setWeather] = useState("")
 
 
+
     useEffect(() => {
+        console.log("effect1")
         axios
             .get('https://restcountries.com/v3.1/all')
             .then((response) => {
                 const { data } = response
-                setCountry(data)
-            })
-    }, [])
-
-     useEffect(() => {
-        const apiKey = process.env.REACT_APP_API_KEY
-        console.log(apiKey)
-        axios.get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${value}`)
-            .then((resultado) => {
-                setWeather(resultado)
-            })
-            .catch((e) => {
-                console.log("catch")
-                console.log(e)
+                const countrySearch = data.filter((e) => {
+                    return e.name.common.toUpperCase().includes(value.toUpperCase())
+                })
+                setCountry(countrySearch)
             })
     }, [value])
+
+
+
+    useEffect(() => {
+        const apiKey = process.env.REACT_APP_API_KEY
+        if (country.length === 1) {
+            axios.get(`http://api.weatherstack.com/current?access_key=${apiKey}&query=${country[0].name.common}`)
+                .then((resultado) => {
+                    setWeather(resultado)
+                })
+                .catch((e) => {
+                    setWeather("Argentina")
+                })
+        }
+    }, [country])
+
+
+    console.log(weather)
 
     const handleClickShowNoShow = (country) => () => {
         setShow(true)
         setCountryDetail(country)
     }
 
-    console.log(weather)
 
 
 
@@ -230,25 +239,19 @@ const List = ({ value, show, setShow }) => {
             </ul>
         )
     } else {
-
-        const countrySearch = country.filter((e) => {
-            return e.name.common.toUpperCase().includes(value.toUpperCase())
-        })
-
-
-        if (countrySearch.length === 0) {
+        if (country.length === 0) {
             return <p>No hay nombres que coincidan</p>
-        } else if (countrySearch.length >= 10) {
+        } else if (country.length >= 10) {
             return (
                 <>
                     <p>Too many matches, specify another filter</p>
                 </>
             )
-        } else if (countrySearch.length < 10 && countrySearch.length > 1) {
+        } else if (country.length < 10 && country.length > 1) {
             if (show === false) {
                 return (
                     <>
-                        {countrySearch.map((e) => {
+                        {country.map((e) => {
                             return (
                                 <div key={e.name.common}>
                                     <p key={e.name.common}>{e.name.common}</p>
@@ -270,10 +273,13 @@ const List = ({ value, show, setShow }) => {
                     </>
                 )
             }
-        } else if (countrySearch.length === 1) {
+        } else if (country.length === 1) {
+            if (weather === "") {
+                return <p></p>
+            } else {
                 return (
                     <>
-                        {countrySearch.map((e) => {
+                        {country.map((e) => {
                             return <div key={e.name.common}>
                                 <h4>País que coincide con su búsqueda: {e.name.common}</h4>
                                 <div>{e.capital.map((e) =>
@@ -284,12 +290,13 @@ const List = ({ value, show, setShow }) => {
                             </div>
                         })}
                         <h4>Temperatura</h4>
-                      <p>{weather.data.current.temperature !== undefined  ? weather.data.current.temperature : "No disponible"} °C</p>
-                        {<p>{weather.data.current_icons !== undefined ? weather.data.current.weather_icons.map((e) => {
+                        <p>{weather.data.current.temperature} °C</p>
+                        <p>{weather.data.current.weather_icons.map((e) => {
                             return <img alt={'icon-wather'} src={e} key={e} />
-                        }):"No disponible"}</p>} 
+                        })}</p>
                     </>
                 )
+            }
         }
     }
 };
