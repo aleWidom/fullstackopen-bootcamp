@@ -1,9 +1,12 @@
 
-const List = ({persons}) => {
+const List = ({ persons, newFilter }) => {
+
+  const filterPersons = persons.filter((person) => person.name.toUpperCase().includes(newFilter.toUpperCase()))
+
   return <div>
-      {persons.map((e)=> {
-         return <p key={e.id}>{e.name} - {e.number}</p>
-      })}
+    {filterPersons.length > 0 ? filterPersons.map((e) => {
+      return <p key={e.name}>{e.name} - {e.number}</p>
+    }) : <p>No se encontraron resultados</p>}
   </div>;
 };
 
