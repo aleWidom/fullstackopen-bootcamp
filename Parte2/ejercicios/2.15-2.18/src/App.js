@@ -1,7 +1,7 @@
-
+/* 
 import Note from "./components/Note"
-import axios from "axios"
 import { useState, useEffect } from "react"
+import { getAll, create, update } from "./services/notes"
 
 
 const App = () => {
@@ -14,26 +14,28 @@ const App = () => {
 
   const [showAll, setShowAll] = useState(true)
 
-
-
-
   const toggleImportance = (id) => () => {
-    const url = `http://localhost:3001/notes/${id}`
     const note = notes.find(n => n.id === id)
     const changedNote = { ...note, important: !note.important }
 
-    axios.put(url, changedNote).then(response => {
-      setNotes(notes.map(
-        note => note.id !== id ? note : response.data))
+    update(id, changedNote)
+    .then(response => {
+      setNotes(notes.map(note => note.id !== id ? note : response))
+    })
+    .catch(error => {
+      alert(
+        `the note '${note.content}' was already deleted from server ${error}`
+      )
+      setNotes(notes.filter(n => n.id !== id))
     })
   }
 
 
   useEffect(() => {
-    axios.get('http://localhost:3001/notes')
-      .then((resultado) => {
-        setNotes(resultado.data)
-      })
+    getAll()
+    .then(initialNotes => {
+      setNotes(initialNotes)
+    })
   }, []);
 
 
@@ -48,12 +50,9 @@ const App = () => {
       date: new Date(),
     }
     setNewNote('')
-
-    axios
-      .post('http://localhost:3001/notes', noteObject)
-      .then(response => {
-        setNotes(notes.concat(response.data))
-      })
+      create(noteObject)
+      .then((response)=> setNotes(notes.concat(response))
+      )
   }
 
 
@@ -104,4 +103,91 @@ const App = () => {
   }
 }
 
-export default App;
+export default App; */
+
+
+
+//EJ2.15
+import React, { useEffect, useState } from 'react'
+import Title from './components/Title'
+import Search from './components/Search'
+import Add from './components/Add'
+import {getAll} from './services/persons'
+
+const App = () => {
+  useEffect(() => {
+      getAll()
+      .then((response) => {
+        setPersons(response)
+      })
+      .catch((error)=> alert(error))
+  }, [])
+
+
+  const [persons, setPersons] = useState([])
+
+  const [newName, setNewName] = useState('')
+
+  const [newNumber, setNewNumber] = useState('')
+
+  const [newFilter, setNewFilter] = useState('')
+
+
+
+  const handleAddPersons = (e) => {
+    e.preventDefault()
+    const arrayName = persons.map((e) => {
+      return e.name
+    })
+
+    const arrayNumber = persons.map((e) => {
+      return e.number
+    })
+
+    if (arrayName.indexOf(newName) !== -1) {
+      alert(`${newName} is already added to phonebook`)
+      setNewName('')
+      setNewNumber('')
+    } else if (arrayNumber.indexOf(newNumber) !== -1) {
+      alert(`${newNumber} is already added to phonebook`)
+      setNewName('')
+      setNewNumber('')
+    }
+    else {
+      const newPerson = {
+        name: newName,
+        number: newNumber
+      }
+      setPersons([...persons, newPerson])
+      setNewName('')
+      setNewNumber('')
+    }
+  }
+
+
+  const handleChangeName = (e) => {
+    setNewName(e.target.value)
+  }
+
+
+  const handleChangeNumber = (e) => {
+    setNewNumber(e.target.value)
+  }
+
+
+  const handleFilter = (e) => {
+    setNewFilter(e.target.value)
+  }
+
+
+  return (
+    <div>
+      <Title title={"Phonebook"} />
+      <Search handleFilter={handleFilter} newFilter={newFilter} persons={persons} />
+      <Title title={"Add a new"} />
+      <Add handleAddPersons={handleAddPersons} newName={newName} handleChangeName={handleChangeName} newNumber={newNumber} handleChangeNumber={handleChangeNumber} />
+    </div>
+  )
+}
+
+export default App; 
