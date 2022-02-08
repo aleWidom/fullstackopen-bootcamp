@@ -12,7 +12,11 @@ const create = async (newObject) => {
     return response.data
 }
 
+const deletePerson = async (id) => {
+    const response = await axios.delete(`${url}/${id}`)
+    return response
+}
 
 
 
-export { getAll, create };
+export { getAll, create, deletePerson };

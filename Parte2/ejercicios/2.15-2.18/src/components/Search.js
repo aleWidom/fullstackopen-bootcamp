@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import List from './List'
 
-const Search = ({ persons }) => {
+const Search = ({ persons, setPersons }) => {
 
     const [newFilter, setNewFilter] = useState('')
 
@@ -13,7 +13,7 @@ const Search = ({ persons }) => {
     return (
         <div>
             filter shown width: <input onChange={handleFilter} value={newFilter} />
-            <List persons={persons} newFilter={newFilter} />
+            <List persons={persons} newFilter={newFilter} setPersons={setPersons} />
         </div>
     )
 };

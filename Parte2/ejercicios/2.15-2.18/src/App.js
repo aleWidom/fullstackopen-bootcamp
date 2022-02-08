@@ -133,7 +133,7 @@ const App = () => {
   return (
     <div>
       <Title title={"Phonebook"} />
-      <Search persons={persons} />
+      <Search persons={persons} setPersons={setPersons} />
       <Title title={"Add a new"} />
       <Add persons={persons} setPersons={setPersons} />
     </div>
